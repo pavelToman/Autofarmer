@@ -291,10 +291,19 @@ class Hrac:
             for i in range(1, (len(a["p"]))+1): #zahrát plíseň tolikrát, kolikrát je v zahradě 
                 c = a["p"][i-1]
                 del b[c]
-                d = max(b, key=b.get) #najdu nejsilnější kytku
+            for i in range(1, (len(a["p"]))+1):
+                c = a["p"][0]
+                b1 = copy.copy(b)
+                while True:
+                    d = max(b1, key=b1.get) #najdu nejsilnější kytku
+                    if d in a["p"]:
+                        del b1[d]
+                        continue
+                    else:
+                        break
                 print(f"Tvoji kytku {c} zabila plíseň a přeskočila ti na kytku {d}!\n")
                 a["k"].remove(c)
-                a["p"].remove(c) 
+                a["p"].remove(c)
                 a["p"].append(d) #plíseň napadá nejsilnější kytku
         #jako druhé se šíří svilušky - zůstanou na kytce a dají -20 bodů nejsilnější kytce v zahradě
         if (len(a["s"]) != 0):
@@ -806,6 +815,8 @@ class Hrac:
                 phz[a]=[]
             (self.hkarty).remove(stara)
 
+#0-0: Číslo hry
+
 #0-1: Počet hráčů
 
 while True:
@@ -824,6 +835,7 @@ print(f"Počet lidí ve hře je {pocet_hracu}")
 
 #0-2: Vytvoření hráčů a jejich jména Hrac.hjmeno
 #(hjmeno, hporadi, hzahrada, hkytek, hsemen, hkarty, hbody):
+
 hraci=list() #vytvořím list hraci, kde mám uložené všechny Hrace
 for i in range(1,(pocet_hracu+1)): #musím počítat od jedné, jinak budu mít navíc hráče 0
     hrac = Hrac(input(f"Jméno hráče {i}?\n"), 0, {"k":[],"s":[],"p":[],"sam":[]}, {}, 0, [], 0) #každý hráč zadá své jméno, uloženo do self.hjmeno
@@ -912,3 +924,10 @@ for c in range(1, len(shraci)+1):
 ##MAMopravit Bouře: line 722, in pBoure
     ##a = shraci.hkytek
     ##AttributeError: 'list' object has no attribute 'hkytek'
+
+#Na kytce [1, 2] máš plíseň a ta se šíří!
+#Tvoji kytku 1 zabila plíseň a přeskočila ti na kytku 3!
+#Tvoji kytku 3 zabila plíseň a přeskočila ti na kytku 4!
+
+#{'k': [2, 4, 5, 6], 's': [], 'p': [2, 4], 'sam': []}
+#{3: 40, 4: 40, 5: 40, 6: 40}
