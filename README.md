@@ -8,10 +8,10 @@ Clone repo locally & run `python -m AF.py` to start this game.
 
 ## Requirements
 
-Python 3.10/
+Python 3.10\
 import random and copy from standard library
 
 ## Future improvments
 
-Please use only numbers to control the game - GUI asap/
+Please use only numbers to control the game - GUI asap\
 Playable over web
